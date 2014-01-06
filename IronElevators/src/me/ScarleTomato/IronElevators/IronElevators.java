@@ -40,9 +40,6 @@ public class IronElevators extends JavaPlugin {
 		//integer values
 		maxElevation = config.getInt("maxElevation");
 		minElevation = config.getInt("minElevation");
-		Bukkit.getLogger().info(Color.RED + "maxElevation = " + config.getInt("maxElevation"));
-		Bukkit.getLogger().info(Color.RED + "elevatorMaterial = " + config.getString("elevatorMaterial"));
-		Bukkit.getLogger().info(Color.RED + "elevatorWhoosh = " + config.getString("elevatorWhoosh"));
 		elevatorMaterial = Material.valueOf(config.getString("elevatorMaterial"));
 		elevatorWhoosh = Sound.valueOf(config.getString("elevatorWhoosh"));
 	}
