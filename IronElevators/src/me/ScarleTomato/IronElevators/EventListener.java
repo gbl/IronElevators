@@ -22,11 +22,11 @@ public class EventListener implements Listener{
 		Player p = e.getPlayer();
 		Block b = p.getLocation().getBlock().getRelative(BlockFace.DOWN);
 		if(!p.isSneaking()
-				&& b.getType() == IronElevators.ELEVATOR_MATERIAL){
-			b = b.getRelative(BlockFace.DOWN, IronElevators.MIN_ELEVATION);
-			int i = IronElevators.MAX_ELEVATION;
+				&& b.getType() == inst.elevatorMaterial){
+			b = b.getRelative(BlockFace.DOWN, inst.minElevation);
+			int i = inst.maxElevation; //16
 			while	(i>0 && !	(
-							   b.getType() == IronElevators.ELEVATOR_MATERIAL
+							   b.getType() == inst.elevatorMaterial
 							&& b.getRelative(BlockFace.UP).getType().isTransparent()
 							&& b.getRelative(BlockFace.UP, 2).getType().isTransparent()
 							)
@@ -39,9 +39,9 @@ public class EventListener implements Listener{
 			if(i>0)
 			{
 				Location l = p.getLocation();
-				l.setY(l.getY()-IronElevators.MAX_ELEVATION-3+i);
+				l.setY(l.getY()-inst.maxElevation-3+i);
 				p.teleport(l);
-				p.getWorld().playSound(l, IronElevators.WHOOSH, 1, 0);
+				p.getWorld().playSound(l, inst.elevatorWhoosh, 1, 0);
 			}
 		}
 	}
@@ -50,11 +50,11 @@ public class EventListener implements Listener{
 	public void upElevator(PlayerMoveEvent e){
 		Block b = e.getTo().getBlock().getRelative(BlockFace.DOWN);
 		if(e.getFrom().getY() < e.getTo().getY()
-				&& b.getType() == IronElevators.ELEVATOR_MATERIAL){
-			b = b.getRelative(BlockFace.UP, IronElevators.MIN_ELEVATION);
-			int i = IronElevators.MAX_ELEVATION;
+				&& b.getType() == inst.elevatorMaterial){
+			b = b.getRelative(BlockFace.UP, inst.minElevation);
+			int i = inst.maxElevation;
 			while(i>0 && !(
-							   b.getType() == IronElevators.ELEVATOR_MATERIAL
+							   b.getType() == inst.elevatorMaterial
 							&& b.getRelative(BlockFace.UP).getType().isTransparent()
 							&& b.getRelative(BlockFace.UP, 2).getType().isTransparent()
 						  )
@@ -67,9 +67,9 @@ public class EventListener implements Listener{
 			{
 				Player p = e.getPlayer();
 				Location l = p.getLocation();
-				l.setY(l.getY()+IronElevators.MAX_ELEVATION+3-i);
+				l.setY(l.getY()+inst.maxElevation+3-i);
 				p.teleport(l);
-				p.getWorld().playSound(l, IronElevators.WHOOSH, 1, 0);
+				p.getWorld().playSound(l, inst.elevatorWhoosh, 1, 0);
 			}
 		}
 	}
