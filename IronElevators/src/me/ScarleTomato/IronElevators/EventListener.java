@@ -21,7 +21,7 @@ public class EventListener implements Listener{
 	public void downElevator(PlayerToggleSneakEvent e){
 		Player p = e.getPlayer();
 		Block b = p.getLocation().getBlock().getRelative(BlockFace.DOWN);
-		if(!p.isSneaking()
+		if(p.hasPermission("ironelevators.use") && !p.isSneaking()
 				&& b.getType() == inst.elevatorMaterial){
 			b = b.getRelative(BlockFace.DOWN, inst.minElevation);
 			int i = inst.maxElevation; //16
@@ -48,8 +48,9 @@ public class EventListener implements Listener{
 	
 	@EventHandler
 	public void upElevator(PlayerMoveEvent e){
+		Player p = e.getPlayer();
 		Block b = e.getTo().getBlock().getRelative(BlockFace.DOWN);
-		if(e.getFrom().getY() < e.getTo().getY()
+		if(p.hasPermission("ironelevators.use") && e.getFrom().getY() < e.getTo().getY()
 				&& b.getType() == inst.elevatorMaterial){
 			b = b.getRelative(BlockFace.UP, inst.minElevation);
 			int i = inst.maxElevation;
@@ -65,7 +66,6 @@ public class EventListener implements Listener{
 			}
 			if(i>0)
 			{
-				Player p = e.getPlayer();
 				Location l = p.getLocation();
 				l.setY(l.getY()+inst.maxElevation+3-i);
 				p.teleport(l);
