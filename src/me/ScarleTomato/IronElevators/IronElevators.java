@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -15,12 +16,12 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class IronElevators extends JavaPlugin {
-	public static final int FILE_COPY_MAX_BYTE_SIZE = 1024;
+	public static final int FILE_COPY_MAX_BYTE_SIZE = 4096;
 	
 	//default config values
 	public int maxElevation = 14, minElevation = 3;
 	public Material elevatorMaterial = Material.IRON_BLOCK;
-	public Sound elevatorWhoosh = Sound.IRONGOLEM_THROW;
+	public Sound elevatorWhoosh = Sound.ENTITY_IRONGOLEM_ATTACK;
 	
 	EventListener listener;
 	FileConfiguration config;
@@ -61,12 +62,12 @@ public class IronElevators extends JavaPlugin {
 			}
 			config.load(configFile);
 		}catch(Exception e){
-			Bukkit.getLogger().warning(ChatColor.RED + "Exception " + Color.white + "when loading configuration file.\n" + e.getMessage());
+			Bukkit.getLogger().log(Level.WARNING, "{0}Exception {1}when loading configuration file.\n{2}", new Object[]{ChatColor.RED, Color.white, e.getMessage()});
 		}
 	}
 	
 	public static void copy(InputStream in, File file){
-		try{
+		try {
 			OutputStream out = new FileOutputStream(file);
 			byte[] buf = new byte[FILE_COPY_MAX_BYTE_SIZE];
 			int len;
@@ -75,7 +76,7 @@ public class IronElevators extends JavaPlugin {
 			}
 			out.close();
 			in.close();
-		}catch(Exception e){
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}

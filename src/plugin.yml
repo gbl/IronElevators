@@ -1,9 +1,9 @@
 name: IronElevators
 main: me.ScarleTomato.IronElevators.IronElevators
-version: 1.02 [mc1.7.4]
+version: gbl 1.10 [mc1.10]
 description: >
              Easy Iron Block Elevators
 permissions:
- ironelevators.use:
+ironelevators.use:
   default: true
   description: Allow a player to teleport between elevators

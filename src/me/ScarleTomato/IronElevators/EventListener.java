@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 
 public class EventListener implements Listener{
@@ -40,7 +42,7 @@ public class EventListener implements Listener{
 			{
 				Location l = p.getLocation();
 				l.setY(l.getY()-inst.maxElevation-3+i);
-				p.teleport(l);
+				p.teleport(l, TeleportCause.PLUGIN);
 				p.getWorld().playSound(l, inst.elevatorWhoosh, 1, 0);
 			}
 		}
@@ -68,7 +70,7 @@ public class EventListener implements Listener{
 			{
 				Location l = p.getLocation();
 				l.setY(l.getY()+inst.maxElevation+3-i);
-				p.teleport(l);
+				p.teleport(l, TeleportCause.PLUGIN);
 				p.getWorld().playSound(l, inst.elevatorWhoosh, 1, 0);
 			}
 		}
