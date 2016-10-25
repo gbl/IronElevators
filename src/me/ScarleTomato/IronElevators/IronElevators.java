@@ -13,6 +13,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class IronElevators extends JavaPlugin {
@@ -22,6 +23,7 @@ public class IronElevators extends JavaPlugin {
 	public int maxElevation = 14, minElevation = 3;
 	public Material elevatorMaterial = Material.IRON_BLOCK;
 	public Sound elevatorWhoosh = Sound.ENTITY_IRONGOLEM_ATTACK;
+        public TeleportCause cause = TeleportCause.UNKNOWN;
 	
 	EventListener listener;
 	FileConfiguration config;
@@ -43,6 +45,7 @@ public class IronElevators extends JavaPlugin {
 		minElevation = config.getInt("minElevation");
 		elevatorMaterial = Material.valueOf(config.getString("elevatorMaterial"));
 		elevatorWhoosh = Sound.valueOf(config.getString("elevatorWhoosh"));
+                cause = TeleportCause.valueOf(config.getString("teleportcause", "UNKNOWN"));
 	}
 	
 	void loadConfig(){
@@ -58,6 +61,7 @@ public class IronElevators extends JavaPlugin {
 				config.set("maxElevation", maxElevation);
 				config.set("elevatorMaterial", elevatorMaterial.toString());
 				config.set("elevatorWhoosh", elevatorWhoosh.toString());
+                                config.set("teleportcause", TeleportCause.UNKNOWN.name());
 				config.save(configFile);
 			}
 			config.load(configFile);
