@@ -22,13 +22,14 @@ public class IronElevators extends JavaPlugin {
 	//default config values
 	public int maxElevation = 14, minElevation = 3;
 	public Material elevatorMaterial = Material.IRON_BLOCK;
-	public Sound elevatorWhoosh = Sound.ENTITY_IRONGOLEM_ATTACK;
+	public Sound elevatorWhoosh = Sound.ENTITY_IRON_GOLEM_ATTACK;
         public TeleportCause cause = TeleportCause.UNKNOWN;
 	
 	EventListener listener;
 	FileConfiguration config;
 	File configFile;
 	
+        @Override
 	public void onEnable(){
 		//load config
 		loadConfig();
